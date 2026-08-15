@@ -1,0 +1,2 @@
+# DogRace
+Thread pool exploration
