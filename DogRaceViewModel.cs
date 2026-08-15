@@ -120,9 +120,9 @@ namespace DogRace
         partial void OnPositionChanged(int value)
         {
             _onDogPositionChanged?.Invoke();
-        }   
-        [ObservableProperty]
-        private int _step;
+        }
+
+        public int Step { get; private set; }
 
         public Dog(string name, CancellationToken token, Action onDogPositionChanged, Action resetVelocities)
         {
@@ -138,7 +138,7 @@ namespace DogRace
         {
             // Generate random steps for each dog
             Random random = new Random();
-            _step = random.Next(1, 10);
+            Step = random.Next(1, 10);
         }
 
         internal void ResetVelocities()
