@@ -1,0 +1,35 @@
+﻿<Window x:Class="DogRace.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DogRace"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1400">
+    <Window.DataContext>
+        <local:DogRaceViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Dogs simulation -->
+        <Slider x:Name="dog1Slider" Value="{Binding Dog1Position, Mode=OneWay}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="0"/>
+        <Slider x:Name="dog2Slider" Value="{Binding Dog2Position, Mode=OneWay}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="1"/>
+        <Slider x:Name="dog3Slider" Value="{Binding Dog3Position, Mode=OneWay}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="2"/>
+        <Slider x:Name="dog4Slider" Value="{Binding Dog4Position, Mode=OneWay}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="3"/>
+        <Slider x:Name="dog5Slider" Value="{Binding Dog5Position, Mode=OneWay}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="4"/>
+        <!-- Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="5">
+            <Button Content="Start" Command="{Binding StartCommand}" Width="100" Height="30" Background="White" Margin="5"/>
+            <Button Content="Stop" Command="{Binding StopCommand}" Width="100" Height="30" Background="White" Margin="5"/>
+            <Button Content="Reset" Command="{Binding ResetCommand}" Width="100" Height="30" Background="White" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
