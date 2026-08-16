@@ -83,6 +83,11 @@ namespace DogRace
             Rank1Visibility = Visibility.Collapsed;
             Rank2Visibility = Visibility.Collapsed;
             Rank3Visibility = Visibility.Collapsed;
+            Dog1Rank = string.Empty;
+            Dog2Rank = string.Empty;
+            Dog3Rank = string.Empty;
+            Dog4Rank = string.Empty;
+            Dog5Rank = string.Empty;
             Ranking.Clear();
         }
 
