@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Automation;
 
 namespace DogRace
@@ -17,15 +18,32 @@ namespace DogRace
         private Dog _dog4;
         private Dog _dog5;
 
+        public List<int> Ranking { get; } = new List<int>();
+
         public int Dog1Position => _dog1.Position;
         public int Dog2Position => _dog2.Position;
         public int Dog3Position => _dog3.Position;
         public int Dog4Position => _dog4.Position;
         public int Dog5Position => _dog5.Position;
 
+        [ObservableProperty]
+        private Visibility _scoresVisibility = Visibility.Collapsed;
+
+        [ObservableProperty]
+        private string _dog1Name = "", _dog2Name = "", _dog3Name = "", _dog4Name = "", _dog5Name = "";
+
+        [ObservableProperty]
+        private string _dog1Score = "", _dog2Score = "", _dog3Score = "", _dog4Score = "", _dog5Score = "";
+
         [RelayCommand]
         private void Start()
         {
+            // Assign dog names
+            _dog1.Name = Dog1Name;
+            _dog2.Name = Dog2Name;
+            _dog3.Name = Dog3Name;
+            _dog4.Name = Dog4Name;
+            _dog5.Name = Dog5Name;
             // Generate random steps for each dog
             _dog1.SetVelocity();
             _dog2.SetVelocity();
@@ -56,6 +74,8 @@ namespace DogRace
             _dog3.Position = 0;
             _dog4.Position = 0;
             _dog5.Position = 0;
+            ScoresVisibility = Visibility.Collapsed;
+            Ranking.Clear();
         }
 
         private void OnDogPositionChanged()
@@ -76,6 +96,28 @@ namespace DogRace
             _dog5.SetVelocity();
         }
 
+        private void Arrived(object number)
+        {
+            if (number is int dogNumber)
+            {
+                if (!Ranking.Contains(dogNumber))
+                {
+                    Ranking.Add(dogNumber);
+                }
+            }
+            if (Ranking.Contains(1))
+                Dog1Score = $"{Ranking.IndexOf(1) + 1}";
+            if (Ranking.Contains(2))
+                Dog2Score = $"{Ranking.IndexOf(2) + 1}";
+            if (Ranking.Contains(3))
+                Dog3Score = $"{Ranking.IndexOf(3) + 1}";
+            if (Ranking.Contains(4))
+                Dog4Score = $"{Ranking.IndexOf(4) + 1}";
+            if (Ranking.Contains(5))
+                Dog5Score = $"{Ranking.IndexOf(5) + 1}";
+            ScoresVisibility = Visibility.Visible;
+        }
+
         static void RunProc(object? dog)
         {
             int runCounter = 0;
@@ -88,7 +130,12 @@ namespace DogRace
             while (dogInstance.Position < 1000)
             {
                 dogInstance.Position += dogInstance.Step;
-                Thread.Sleep(500); // Simulate time taken for each step
+                if (dogInstance.Position >= 1000)
+                {
+
+                    dogInstance.Arrived();
+                }
+                Thread.Sleep(100); // Simulate time taken for each step
                 runCounter++;
                 // Reset velocities from time to time
                 if (runCounter >= 10)
@@ -101,11 +148,11 @@ namespace DogRace
 
         public DogRaceViewModel()
         {
-            _dog1 = new Dog("Dog 1", _cts.Token, OnDogPositionChanged, ResetVelocities);
-            _dog2 = new Dog("Dog 2", _cts.Token, OnDogPositionChanged, ResetVelocities);
-            _dog3 = new Dog("Dog 3", _cts.Token, OnDogPositionChanged, ResetVelocities);
-            _dog4 = new Dog("Dog 4", _cts.Token, OnDogPositionChanged, ResetVelocities);
-            _dog5 = new Dog("Dog 5", _cts.Token, OnDogPositionChanged, ResetVelocities);
+            _dog1 = new Dog(1, _cts.Token, OnDogPositionChanged, ResetVelocities, Arrived);
+            _dog2 = new Dog(2, _cts.Token, OnDogPositionChanged, ResetVelocities, Arrived);
+            _dog3 = new Dog(3, _cts.Token, OnDogPositionChanged, ResetVelocities, Arrived);
+            _dog4 = new Dog(4, _cts.Token, OnDogPositionChanged, ResetVelocities, Arrived);
+            _dog5 = new Dog(5, _cts.Token, OnDogPositionChanged, ResetVelocities, Arrived);
         }
     }
 
@@ -114,22 +161,27 @@ namespace DogRace
         private CancellationToken _token;
         private Action _onDogPositionChanged;
         private Action _resetVelocities;
-        private string _name;
+        private Action<object> _arrived;
+        private int _number;
         [ObservableProperty]
         private int _position;
         partial void OnPositionChanged(int value)
         {
             _onDogPositionChanged?.Invoke();
         }
+        [ObservableProperty]
+        private string _name;
 
         public int Step { get; private set; }
 
-        public Dog(string name, CancellationToken token, Action onDogPositionChanged, Action resetVelocities)
+        public Dog(int number, CancellationToken token, Action onDogPositionChanged, Action resetVelocities, Action<object> arrived)
         {
-            _name = name;
+            _number = number;
             _token = token;
             _onDogPositionChanged = onDogPositionChanged;
             _resetVelocities = resetVelocities;
+            _arrived = arrived;
+
             _position = 0;
             SetVelocity();
         }
@@ -144,6 +196,11 @@ namespace DogRace
         internal void ResetVelocities()
         {
             _resetVelocities?.Invoke();
+        }
+
+        internal void Arrived()
+        {
+            _arrived?.Invoke(_number);
         }
 
         public bool CancelRequested => _token.IsCancellationRequested;
