@@ -98,20 +98,20 @@
         <TextBox Text="{Binding Dog1Name}" FontSize="18" Height="30" Grid.Row="0" Grid.Column="0"/>
         <TextBox Text="{Binding Dog2Name}" FontSize="18" Height="30" Grid.Row="1" Grid.Column="0"/>
         <TextBox Text="{Binding Dog3Name}" FontSize="18" Height="30" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog4Name}" FontSize="18" Height="30" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog5Name}" FontSize="18" Height="30" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Text="{Binding Dog4Name}" Visibility="{Binding Dog4Visibility}" FontSize="18" Height="30" Grid.Row="3" Grid.Column="0"/>
+        <TextBox Text="{Binding Dog5Name}" Visibility="{Binding Dog5Visibility}" FontSize="18" Height="30" Grid.Row="4" Grid.Column="0"/>
         <!-- Dogs simulation -->
         <Slider x:Name="dog1Slider" Value="{Binding Dog1Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="0" Grid.Column="1"/>
         <Slider x:Name="dog2Slider" Value="{Binding Dog2Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}"  Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="1" Grid.Column="1"/>
         <Slider x:Name="dog3Slider" Value="{Binding Dog3Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="2" Grid.Column="1"/>
-        <Slider x:Name="dog4Slider" Value="{Binding Dog4Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="3" Grid.Column="1"/>
-        <Slider x:Name="dog5Slider" Value="{Binding Dog5Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="4" Grid.Column="1"/>
-        <!-- Dogs scores-->
-        <TextBlock Text="{Binding Dog1Score}" FontSize="20" Visibility="{Binding ScoresVisibility}" Grid.Row="0" Grid.Column="2"/>
-        <TextBlock Text="{Binding Dog2Score}" FontSize="20" Visibility="{Binding ScoresVisibility}" Grid.Row="1" Grid.Column="2"/>
-        <TextBlock Text="{Binding Dog3Score}" FontSize="20" Visibility="{Binding ScoresVisibility}" Grid.Row="2" Grid.Column="2"/>
-        <TextBlock Text="{Binding Dog4Score}" FontSize="20" Visibility="{Binding ScoresVisibility}" Grid.Row="3" Grid.Column="2"/>
-        <TextBlock Text="{Binding Dog5Score}" FontSize="20" Visibility="{Binding ScoresVisibility}" Grid.Row="4" Grid.Column="2"/>
+        <Slider x:Name="dog4Slider" Value="{Binding Dog4Position, Mode=OneWay}" Visibility="{Binding Dog4Visibility}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="3" Grid.Column="1"/>
+        <Slider x:Name="dog5Slider" Value="{Binding Dog5Position, Mode=OneWay}" Visibility="{Binding Dog5Visibility}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="4" Grid.Column="1"/>
+        <!-- Dogs ranks-->
+        <TextBlock Text="{Binding Dog1Rank}" FontSize="20" Visibility="{Binding Rank1Visibility}" Grid.Row="0" Grid.Column="2"/>
+        <TextBlock Text="{Binding Dog2Rank}" FontSize="20" Visibility="{Binding Rank2Visibility}" Grid.Row="1" Grid.Column="2"/>
+        <TextBlock Text="{Binding Dog3Rank}" FontSize="20" Visibility="{Binding Rank3Visibility}" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock Text="{Binding Dog4Rank}" FontSize="20" Visibility="{Binding Rank4Visibility}" Grid.Row="3" Grid.Column="2"/>
+        <TextBlock Text="{Binding Dog5Rank}" FontSize="20" Visibility="{Binding Rank5Visibility}" Grid.Row="4" Grid.Column="2"/>
         <!-- Buttons -->
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="3">
             <Button Content="Start" Command="{Binding StartCommand}" Width="100" Height="30" Background="White" Margin="5"/>

@@ -27,13 +27,19 @@ namespace DogRace
         public int Dog5Position => _dog5.Position;
 
         [ObservableProperty]
-        private Visibility _scoresVisibility = Visibility.Collapsed;
+        private Visibility _rank1Visibility = Visibility.Collapsed,
+                           _rank2Visibility = Visibility.Collapsed,
+                           _rank3Visibility = Visibility.Collapsed,
+                           _rank4Visibility = Visibility.Collapsed,
+                           _rank5Visibility = Visibility.Collapsed,
+                           _dog4Visibility = Visibility.Collapsed,
+                           _dog5Visibility = Visibility.Collapsed;
 
         [ObservableProperty]
         private string _dog1Name = "", _dog2Name = "", _dog3Name = "", _dog4Name = "", _dog5Name = "";
 
         [ObservableProperty]
-        private string _dog1Score = "", _dog2Score = "", _dog3Score = "", _dog4Score = "", _dog5Score = "";
+        private string _dog1Rank = "", _dog2Rank = "", _dog3Rank = "", _dog4Rank = "", _dog5Rank = "";
 
         [RelayCommand]
         private void Start()
@@ -55,8 +61,8 @@ namespace DogRace
             ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc),  _dog1);
             ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog2);
             ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog3);
-            ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog4);
-            ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog5);
+            //ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog4);
+            //ThreadPool.QueueUserWorkItem(new WaitCallback(RunProc), _dog5);
         }
 
         [RelayCommand]
@@ -74,7 +80,9 @@ namespace DogRace
             _dog3.Position = 0;
             _dog4.Position = 0;
             _dog5.Position = 0;
-            ScoresVisibility = Visibility.Collapsed;
+            Rank1Visibility = Visibility.Collapsed;
+            Rank2Visibility = Visibility.Collapsed;
+            Rank3Visibility = Visibility.Collapsed;
             Ranking.Clear();
         }
 
@@ -106,16 +114,18 @@ namespace DogRace
                 }
             }
             if (Ranking.Contains(1))
-                Dog1Score = $"{Ranking.IndexOf(1) + 1}";
+                Dog1Rank = $"{Ranking.IndexOf(1) + 1}";
             if (Ranking.Contains(2))
-                Dog2Score = $"{Ranking.IndexOf(2) + 1}";
+                Dog2Rank = $"{Ranking.IndexOf(2) + 1}";
             if (Ranking.Contains(3))
-                Dog3Score = $"{Ranking.IndexOf(3) + 1}";
+                Dog3Rank = $"{Ranking.IndexOf(3) + 1}";
             if (Ranking.Contains(4))
-                Dog4Score = $"{Ranking.IndexOf(4) + 1}";
+                Dog4Rank = $"{Ranking.IndexOf(4) + 1}";
             if (Ranking.Contains(5))
-                Dog5Score = $"{Ranking.IndexOf(5) + 1}";
-            ScoresVisibility = Visibility.Visible;
+                Dog5Rank = $"{Ranking.IndexOf(5) + 1}";
+            Rank1Visibility = Visibility.Visible;
+            Rank2Visibility = Visibility.Visible;
+            Rank3Visibility = Visibility.Visible;
         }
 
         static void RunProc(object? dog)
