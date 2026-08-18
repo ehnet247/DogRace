@@ -14,10 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="dog-icon-35935.png" />
+    <PackageReference Include="Material.Icons.WPF" Version="3.0.2" />
   </ItemGroup>
 
 </Project>

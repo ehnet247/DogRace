@@ -150,7 +150,7 @@ namespace DogRace
 
                     dogInstance.Arrived();
                 }
-                Thread.Sleep(100); // Simulate time taken for each step
+                Thread.Sleep(10); // Simulate time taken for each step
                 runCounter++;
                 // Reset velocities from time to time
                 if (runCounter >= 10)

@@ -3,28 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         xmlns:local="clr-namespace:DogRace"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1400">
+        Title="DogRace" Height="400" Width="1000">
     <Window.Resources>
 
-        <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Style x:Key="SliderThumb1" TargetType="Thumb">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="30" Width="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="/dog-icon-35935.png"></ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                        <Label Content="{materialIcons:MaterialIconExt Kind=DogSide}" Foreground="RosyBrown" FontSize="30" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+        <Style x:Key="SliderThumb2" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Label Content="{materialIcons:MaterialIconExt Kind=DogSide}" Foreground="Turquoise" FontSize="30" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb3" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Label Content="{materialIcons:MaterialIconExt Kind=DogSide}" Foreground="Yellow" FontSize="30" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider1"  TargetType="Slider">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -33,13 +54,43 @@
                 </Grid.RowDefinitions>
                 <Track Grid.Row="1" x:Name="PART_Track"   >
                     <Track.Thumb>
-                        <Thumb Style="{StaticResource SliderThumb}"  />
+                        <Thumb Style="{StaticResource SliderThumb1}"  />
                     </Track.Thumb>
                 </Track>
             </Grid>
         </ControlTemplate>
 
-        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+        <ControlTemplate x:Key="Slider2"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb2}"  />
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Slider3"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb3}"  />
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider1" TargetType="Slider">
             <Setter Property="Focusable" Value="False"/>
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -47,7 +98,33 @@
                 <Trigger Property="Orientation" Value="Horizontal">
                     <Setter Property="MinHeight" Value="21" />
                     <Setter Property="MinWidth" Value="104" />
-                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                    <Setter Property="Template" Value="{StaticResource Slider1}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="Horizontal_Slider2" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider2}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="Horizontal_Slider3" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider3}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -71,17 +148,15 @@
         </Grid.ColumnDefinitions>
 
         <!-- Dogs names-->
-        <TextBox Text="{Binding Dog1Name}" FontSize="18" Height="30" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog2Name}" FontSize="18" Height="30" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog3Name}" FontSize="18" Height="30" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog4Name}" Visibility="{Binding Dog4Visibility}" FontSize="18" Height="30" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Text="{Binding Dog5Name}" Visibility="{Binding Dog5Visibility}" FontSize="18" Height="30" Grid.Row="4" Grid.Column="0"/>
+        <local:Entry Text="{Binding Dog1Name}" PlaceHolder="Name" HorizontalContentAlignment="Center" FontSize="18" Height="30" Grid.Row="0" Grid.Column="0"/>
+        <local:Entry Text="{Binding Dog2Name}" PlaceHolder="Name" HorizontalContentAlignment="Center" FontSize="18" Height="30" Grid.Row="1" Grid.Column="0"/>
+        <local:Entry Text="{Binding Dog3Name}" PlaceHolder="Name" HorizontalContentAlignment="Center" FontSize="18" Height="30" Grid.Row="2" Grid.Column="0"/>
+        <local:Entry Text="{Binding Dog4Name}" PlaceHolder="Name" Visibility="{Binding Dog4Visibility}" HorizontalContentAlignment="Center" FontSize="18" Height="30" Grid.Row="3" Grid.Column="0"/>
+        <local:Entry Text="{Binding Dog5Name}" PlaceHolder="Name" Visibility="{Binding Dog5Visibility}" HorizontalContentAlignment="Center" FontSize="18" Height="30" Grid.Row="4" Grid.Column="0"/>
         <!-- Dogs simulation -->
-        <Slider x:Name="dog1Slider" Value="{Binding Dog1Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="0" Grid.Column="1"/>
-        <Slider x:Name="dog2Slider" Value="{Binding Dog2Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}"  Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="1" Grid.Column="1"/>
-        <Slider x:Name="dog3Slider" Value="{Binding Dog3Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="2" Grid.Column="1"/>
-        <Slider x:Name="dog4Slider" Value="{Binding Dog4Position, Mode=OneWay}" Visibility="{Binding Dog4Visibility}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="3" Grid.Column="1"/>
-        <Slider x:Name="dog5Slider" Value="{Binding Dog5Position, Mode=OneWay}" Visibility="{Binding Dog5Visibility}" Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="4" Grid.Column="1"/>
+        <Slider x:Name="dog1Slider" Value="{Binding Dog1Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider1}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="0" Grid.Column="1"/>
+        <Slider x:Name="dog2Slider" Value="{Binding Dog2Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider2}"  Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="1" Grid.Column="1"/>
+        <Slider x:Name="dog3Slider" Value="{Binding Dog3Position, Mode=OneWay}" Style="{StaticResource Horizontal_Slider3}" Minimum="0" Maximum="1000" Height="30" Margin="10" Grid.Row="2" Grid.Column="1"/>
         <!-- Dogs ranks-->
         <TextBlock Text="{Binding Dog1Rank}" FontSize="20" Visibility="{Binding Rank1Visibility}" Grid.Row="0" Grid.Column="2"/>
         <TextBlock Text="{Binding Dog2Rank}" FontSize="20" Visibility="{Binding Rank2Visibility}" Grid.Row="1" Grid.Column="2"/>
